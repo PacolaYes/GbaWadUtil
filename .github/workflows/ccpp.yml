@@ -26,13 +26,13 @@ jobs:
         make
     - name: "*nix: Stash"
       if: matrix.os != 'windows'
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@4.6.2
       with:
         name: GbaWadUtil-${{ matrix.os }}
         path: GbaWadUtil
     - name: "Windows: Stash"
       if: matrix.os == 'windows'
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@4.6.2
       with:
         name: GbaWadUtil-${{ matrix.os }}
         path: release/GbaWadUtil.exe
