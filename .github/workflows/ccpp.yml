@@ -8,18 +8,12 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu, windows, macos]
+        os: ubuntu
     steps:
     - name: Checkout
       uses: actions/checkout@v1
     - name: "*nix: Install Qt"
       uses: jurplel/install-qt-action@v2
-      if: matrix.os != 'windows'
-    - name: "Windows: Install Qt"
-      uses: jurplel/install-qt-action@v2
-      if: matrix.os == 'windows'
-      with:
-        arch: win64_mingw73
     - name: Build
       run: |
         qmake
@@ -30,10 +24,4 @@ jobs:
       with:
         name: GbaWadUtil-${{ matrix.os }}
         path: GbaWadUtil
-    - name: "Windows: Stash"
-      if: matrix.os == 'windows'
-      uses: actions/upload-artifact@v4
-      with:
-        name: GbaWadUtil-${{ matrix.os }}
-        path: release/GbaWadUtil.exe
 
